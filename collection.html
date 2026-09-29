@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Koleksi — NUMEA CHARMS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =================================
+           COLLECTION PAGE
+        ================================= */
+
+        .collection-page {
+            padding-top: 160px;
+            min-height: 100vh;
+        }
+
+        .collection-hero {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 70px;
+        }
+
+        .collection-hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .collection-hero h1 span {
+            color: var(--rose);
+            font-style: italic;
+        }
+
+        .collection-hero p:not(.eyebrow) {
+            max-width: 550px;
+            margin: auto;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+
+        /* FILTER */
+
+        .collection-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-bottom: 60px;
+        }
+
+        .filter-button {
+            padding: 12px 20px;
+
+            border: 1px solid var(--pink);
+            background: transparent;
+
+            color: var(--deep-rose);
+
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: var(--deep-rose);
+            border-color: var(--deep-rose);
+            color: white;
+        }
+
+
+        /* PRODUCTS */
+
+        .all-products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+
+            box-shadow:
+                0 25px 50px rgba(143, 82, 98, 0.1);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            aspect-ratio: 0.9;
+            object-fit: cover;
+
+            transition: transform 0.7s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .product-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+
+            padding: 7px 11px;
+
+            background: rgba(255,255,255,0.9);
+
+            color: var(--deep-rose);
+
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            color: var(--deep-rose);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back-home {
+            display: flex;
+            justify-content: center;
+
+            margin-top: 70px;
+        }
+
+
+        /* FOOTER */
+
+        .collection-footer {
+            margin-top: 120px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .all-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .collection-page {
+                padding-top: 120px;
+            }
+
+            .all-products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .collection-filter {
+                gap: 7px;
+            }
+
+            .filter-button {
+                padding: 10px 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar" id="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                NUMEA<span>.</span>
+            </a>
+
+
+            <nav class="nav-menu" id="navMenu">
+
+                <a href="index.html#home" class="nav-link">
+                    Beranda
+                </a>
+
+                <a href="index.html#about" class="nav-link">
+                    Tentang Kami
+                </a>
+
+                <a href="collection.html" class="nav-link active">
+                    Koleksi
+                </a>
+
+                <a href="index.html#vision-mission" class="nav-link">
+                    Visi &amp; Misi
+                </a>
+
+                <a href="index.html#gallery" class="nav-link">
+                    Galeri
+                </a>
+
+                <a href="index.html#contact" class="nav-link">
+                    Kontak
+                </a>
+
+            </nav>
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open navigation"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =========================
+             COLLECTION HERO
+        ========================== -->
+
+        <section class="collection-page">
+
+            <div class="section-container">
+
+
+                <div class="collection-hero">
+
+                    <p class="eyebrow">
+                        KOLEKSI NUMEA
+                    </p>
+
+                    <h1>
+                        Charm untuk
+                        <span>Setiap Cerita.</span>
+                    </h1>
+
+                    <p>
+                        Pilih charm yang sesuai dengan gaya dan hal-hal yang ingin kamu wakili. Setiap desain punya karakter dan makna yang berbeda.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =========================
+                     FILTER
+                ========================== -->
+
+                <div class="collection-filter">
+
+                    <button
+                        class="filter-button active"
+                        data-filter="all"
+                    >
+                        SEMUA
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        data-filter="love"
+                    >
+                        LOVE
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        data-filter="dream"
+                    >
+                        DREAM
+                    </button>
+
+                    <button
+                        class="filter-button"
+                        data-filter="symbol"
+                    >
+                        SIMBOL
+                    </button>
+
+                </div>
+
+
+
+                <!-- =========================
+                     PRODUCTS
+                ========================== -->
+
+                <div class="all-products-grid" id="productGrid">
+
+
+                    <!-- LOVE -->
+
+                    <article
+                        class="product-card"
+                        data-category="love"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/heart.jpg"
+                                alt="Heart charm"
+                            >
+
+                            <span class="product-category">
+                                LOVE
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Heart Charm</h3>
+
+                            <p>
+                                Simbol sederhana yang cocok untuk mewakili cinta dan hubungan yang berarti.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- LOVE -->
+
+                    <article
+                        class="product-card"
+                        data-category="love"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/initial.jpg"
+                                alt="Initial charm"
+                            >
+
+                            <span class="product-category">
+                                LOVE
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Initial Charm</h3>
+
+                            <p>
+                                Tambahkan inisial seseorang yang memiliki arti khusus bagimu.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- DREAM -->
+
+                    <article
+                        class="product-card"
+                        data-category="dream"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/star.jpg"
+                                alt="Star charm"
+                            >
+
+                            <span class="product-category">
+                                DREAM
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Star Charm</h3>
+
+                            <p>
+                                Simbol yang bisa menjadi pengingat untuk tetap mengejar impianmu.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- DREAM -->
+
+                    <article
+                        class="product-card"
+                        data-category="dream"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/moon.jpg"
+                                alt="Moon charm"
+                            >
+
+                            <span class="product-category">
+                                DREAM
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Moon Charm</h3>
+
+                            <p>
+                                Pilihan untuk kamu yang menyukai simbol bulan dan suasana yang tenang.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+
+
+                   
+
+                    <!-- SIMBOL -->
+
+                    <article
+                        class="product-card"
+                        data-category="symbol"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/flower.jpg"
+                                alt="Flower charm"
+                            >
+
+                            <span class="product-category">
+                                SIMBOL
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Flower Charm</h3>
+
+                            <p>
+                                Simbol bunga yang sederhana untuk mewakili keindahan, pertumbuhan, atau awal yang baru.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- LOVE -->
+
+                    <article
+                        class="product-card"
+                        data-category="love"
+                    >
+
+                        <div class="product-image">
+
+                            <img
+                                src="assets/images/couple.jpg"
+                                alt="Couple charm"
+                            >
+
+                            <span class="product-category">
+                                LOVE
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <h3>Couple Charm</h3>
+
+                            <p>
+                                Pilihan charm untuk mewakili hubungan dan kebersamaan dengan seseorang yang spesial.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+
+                <!-- BACK -->
+
+                <div class="back-home">
+
+                    <a
+                        href="index.html#collection"
+                        class="secondary-button"
+                    >
+                        ← Kembali ke Koleksi
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer collection-footer">
+
+        <div class="section-container footer-container">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+                    NUMEA<span>.</span>
+                </a>
+
+                <p>
+                    A Charm for Every Story.
+                </p>
+
+            </div>
+
+
+            <div class="footer-nav">
+
+                <a href="index.html#home">
+                    Beranda
+                </a>
+
+                <a href="index.html#about">
+                    Tentang Kami
+                </a>
+
+                <a href="collection.html">
+                    Koleksi
+                </a>
+
+                <a href="index.html#contact">
+                    Kontak
+                </a>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 NUMEA CHARMS. Hak cipta dilindungi.
+                </p>
+
+                <p>
+                    Made with ♡
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* NAVBAR */
+
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+
+
+        /* MOBILE MENU */
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        const navMenu =
+            document.getElementById("navMenu");
+
+        menuToggle.addEventListener("click", () => {
+
+            navMenu.classList.toggle("open");
+
+        });
+
+
+
+        /* FILTER */
+
+        const filterButtons =
+            document.querySelectorAll(".filter-button");
+
+        const products =
+            document.querySelectorAll(".product-card");
+
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const filter =
+                    button.dataset.filter;
+
+
+                /* active button */
+
+                filterButtons.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+
+                /* filter products */
+
+                products.forEach(product => {
+
+                    const category =
+                        product.dataset.category;
+
+
+                    if (
+                        filter === "all" ||
+                        category === filter
+                    ) {
+
+                        product.style.display = "block";
+
+                    } else {
+
+                        product.style.display = "none";
+
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
